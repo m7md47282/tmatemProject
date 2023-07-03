@@ -1,0 +1,39 @@
+<div class="login-form-container">
+    <div class="login-form">
+        <div class="logo-container">
+            <img src="../assets/logos/tamtemLogo.png" width="128" height="128" alt="logo">
+        </div>
+        <form (ngSubmit)="login(loginForm)" name="loginForm"  #loginForm="ngForm">
+            <div class="form-input">
+                <div class="form-control">
+                    <input type="email" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" [(ngModel)]="loginInputs.email" #emailInput="ngModel" required>
+                    <label class="input-placeholder" for="email"> Email</label>
+                </div>
+                <span class="form-input-error" *ngIf="emailInput.invalid && emailInput.dirty">
+                    Invaild email
+                </span>
+            </div>
+            <div class="form-input">
+                <div class="form-control">
+                    <input type="password" id="password" name="password" pattern="^(?=.*[A-Z])[A-Za-z\d@$!%*#?&]{8,}$" [(ngModel)]="loginInputs.password" #passwordInput="ngModel" required>
+                    <label class="input-placeholder" for="password"> Password </label>
+                </div>
+                <div class="input-errors">
+                    <span class="form-input-error" *ngIf="passwordInput.invalid && passwordInput.dirty">
+                        Invaild password
+                    </span>
+                    <span class="form-input-error" *ngIf="passwordInput.dirty && passwordInput?.errors?.['pattern']">
+                        <ul>
+                            <li>Should be at least 8 characters</li>
+                            <li>Should have at least 1 uppercase character</li>
+                        </ul>
+                    </span>
+                </div>
+               
+            </div>
+            <div class="actions">
+                <button class="submit" [disabled]="loginForm.invalid" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
